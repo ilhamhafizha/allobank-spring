@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: allobank-split-bill
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/allobank_split_bill
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+
+server:
+  port: 4110
+
+app:
+  github-username: "ilhamhafizha"
