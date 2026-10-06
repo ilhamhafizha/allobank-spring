@@ -10,12 +10,17 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class SettlementCalculator {
+
+    public BigDecimal calculateServiceChargeAmount(BigDecimal total, BigDecimal percentage) {
+        return total.multiply(percentage).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+    }
 
     public List<SettlementResponse.SettlementTransaction> calculate(
             List<Participant> participants,
@@ -25,15 +30,24 @@ public class SettlementCalculator {
         Map<Long, BigDecimal> balances = new LinkedHashMap<>();
         Map<Long, Participant> participantById = new LinkedHashMap<>();
 
-        for (Participant participant : participants) {
+        for (Participant participant : participants.stream()
+                .sorted(Comparator.comparing(Participant::getId)).toList()) {
             balances.put(participant.getId(), BigDecimal.ZERO);
             participantById.put(participant.getId(), participant);
         }
 
-        for (Expense expense : expenses) {
+        BigDecimal cumulativeAmount = BigDecimal.ZERO;
+        BigDecimal allocatedCharge = BigDecimal.ZERO;
+        // Cumulative rounding keeps allocated charges equal to the group-level charge.
+        List<Expense> orderedExpenses = expenses.stream()
+                .sorted(Comparator.comparing(Expense::getId,
+                        Comparator.nullsLast(Comparator.naturalOrder())))
+                .toList();
+        for (Expense expense : orderedExpenses) {
             List<Participant> sharedWith = expense.getParticipants()
                     .stream()
                     .map(ExpenseParticipant::getParticipant)
+                    .sorted(Comparator.comparing(Participant::getId))
                     .toList();
 
             if (sharedWith.isEmpty()) {
@@ -44,13 +58,11 @@ public class SettlementCalculator {
 
             BigDecimal amount = expense.getAmount();
 
-            BigDecimal charge = amount
-                    .multiply(serviceChargePct)
-                    .divide(
-                            BigDecimal.valueOf(100),
-                            2,
-                            RoundingMode.HALF_UP
-                    );
+            cumulativeAmount = cumulativeAmount.add(amount);
+            BigDecimal cumulativeCharge = calculateServiceChargeAmount(
+                    cumulativeAmount, serviceChargePct);
+            BigDecimal charge = cumulativeCharge.subtract(allocatedCharge);
+            allocatedCharge = cumulativeCharge;
 
             BigDecimal totalWithCharge = amount.add(charge);
 
@@ -132,7 +144,9 @@ public class SettlementCalculator {
 
             transactions.add(
                     new SettlementResponse.SettlementTransaction(
+                            from.getId(),
                             from.getName(),
+                            to.getId(),
                             to.getName(),
                             transfer.setScale(2, RoundingMode.HALF_UP)
                     )

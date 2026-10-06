@@ -3,9 +3,9 @@ spring:
     name: allobank-split-bill
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/allobank_split_bill
-    username: postgres
-    password: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/allobank_split_bill}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -20,4 +20,4 @@ server:
   port: 4110
 
 app:
-  github-username: "ilhamhafizha"
+  github-username: ${GITHUB_USERNAME:ilhamhafizha}

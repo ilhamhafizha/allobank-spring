@@ -1,6 +1,8 @@
 package com.allobanksplitbill.dto.request;
 
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -21,11 +23,13 @@ public class CreateExpenseRequest {
 
     @NotNull
     @DecimalMin(value = "0.01")
+    @Digits(integer = 17, fraction = 2)
     private BigDecimal amount;
 
     @NotNull
+    @Positive
     private Long paidBy;
 
     @NotEmpty
-    private List<Long> participantIds;
+    private List<@NotNull @Positive Long> participantIds;
 }

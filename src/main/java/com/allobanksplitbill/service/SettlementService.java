@@ -64,13 +64,8 @@ public class SettlementService {
 
         BigDecimal serviceChargePct = calculateServiceChargePct();
 
-        BigDecimal serviceChargeAmount = totalExpense
-                .multiply(serviceChargePct)
-                .divide(
-                        BigDecimal.valueOf(100),
-                        2,
-                        RoundingMode.HALF_UP
-                );
+        BigDecimal serviceChargeAmount = settlementCalculator.calculateServiceChargeAmount(
+                totalExpense, serviceChargePct);
 
         var transactions = settlementCalculator.calculate(
                 participants,
