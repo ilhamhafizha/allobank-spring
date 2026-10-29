@@ -31,3 +31,16 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local configuration and private supporting files
+.env
+.env.*
+!.env.example
+.local/*
+!.local/docs/
+!.local/docs/**
+.DS_Store
+*.log
+
+# Keep supporting documentation versioned
+!.local/docs/HELP.md

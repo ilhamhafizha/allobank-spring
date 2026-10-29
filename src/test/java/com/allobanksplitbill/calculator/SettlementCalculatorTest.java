@@ -1,6 +1,6 @@
 package com.allobanksplitbill.calculator;
 
-import com.allobanksplitbill.dto.respon.SettlementResponse;
+import com.allobanksplitbill.dto.response.SettlementResponse;
 import com.allobanksplitbill.entity.Expense;
 import com.allobanksplitbill.entity.ExpenseParticipant;
 import com.allobanksplitbill.entity.Participant;

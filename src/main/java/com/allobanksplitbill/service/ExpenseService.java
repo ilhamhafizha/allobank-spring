@@ -1,8 +1,8 @@
 package com.allobanksplitbill.service;
 
 import com.allobanksplitbill.dto.request.CreateExpenseRequest;
-import com.allobanksplitbill.dto.respon.ExpenseResponse;
-import com.allobanksplitbill.dto.respon.ParticipantResponse;
+import com.allobanksplitbill.dto.response.ExpenseResponse;
+import com.allobanksplitbill.dto.response.ParticipantResponse;
 import com.allobanksplitbill.entity.BillGroup;
 import com.allobanksplitbill.entity.Expense;
 import com.allobanksplitbill.entity.ExpenseParticipant;

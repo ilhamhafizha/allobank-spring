@@ -3,7 +3,7 @@ package com.allobanksplitbill.service;
 
 
 import com.allobanksplitbill.calculator.SettlementCalculator;
-import com.allobanksplitbill.dto.respon.SettlementResponse;
+import com.allobanksplitbill.dto.response.SettlementResponse;
 import com.allobanksplitbill.entity.Expense;
 import com.allobanksplitbill.entity.Participant;
 import com.allobanksplitbill.repository.BillGroupRepository;

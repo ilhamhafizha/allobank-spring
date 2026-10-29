@@ -1,6 +1,6 @@
 package com.allobanksplitbill.controller;
 
-import com.allobanksplitbill.dto.respon.SettlementResponse;
+import com.allobanksplitbill.dto.response.SettlementResponse;
 import com.allobanksplitbill.service.SettlementService;
 import org.springframework.web.bind.annotation.*;
 

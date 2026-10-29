@@ -1,7 +1,7 @@
 package com.allobanksplitbill.controller;
 
 import com.allobanksplitbill.dto.request.CreateBillGroupRequest;
-import com.allobanksplitbill.dto.respon.BillGroupResponse;
+import com.allobanksplitbill.dto.response.BillGroupResponse;
 import com.allobanksplitbill.service.BillGroupService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

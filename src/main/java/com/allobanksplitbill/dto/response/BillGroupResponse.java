@@ -1,4 +1,4 @@
-package com.allobanksplitbill.dto.respon;
+package com.allobanksplitbill.dto.response;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.allobanksplitbill.dto;
 
-import com.allobanksplitbill.dto.respon.SettlementResponse;
+import com.allobanksplitbill.dto.response.SettlementResponse;
 import org.junit.jupiter.api.Test;
 import tools.jackson.databind.ObjectMapper;
 

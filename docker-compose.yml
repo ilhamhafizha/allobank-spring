@@ -1,21 +1,16 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: allobank-split-bill-db
-
     environment:
-      POSTGRES_DB: allobank_split_bill
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-
+      POSTGRES_DB: ${DB_NAME:?Set DB_NAME in .env}
+      POSTGRES_USER: ${DB_USERNAME:?Set DB_USERNAME in .env}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
     ports:
-      - "5433:5432"
-
+      - "${DB_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d allobank_split_bill"]
+      test: ["CMD-SHELL", 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
       interval: 5s
       timeout: 5s
       retries: 10
@@ -24,18 +19,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
-    container_name: allobank-split-bill-app
-
     ports:
-      - "4110:4110"
-
+      - "${SERVER_PORT:-4110}:4110"
     environment:
-      DB_URL: jdbc:postgresql://postgres:5432/allobank_split_bill
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      GITHUB_USERNAME: ilhamhafizha
-
+      DB_URL: jdbc:postgresql://postgres:5432/${DB_NAME:?Set DB_NAME in .env}
+      DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in .env}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      GITHUB_USERNAME: ${GITHUB_USERNAME:?Set GITHUB_USERNAME in .env}
+      SERVER_PORT: 4110
     depends_on:
       postgres:
         condition: service_healthy

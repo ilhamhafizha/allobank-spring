@@ -1,4 +1,4 @@
-package com.allobanksplitbill.dto.respon;
+package com.allobanksplitbill.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
