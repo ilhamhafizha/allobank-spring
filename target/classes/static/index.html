@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffce32"><title>allo • Split Bill</title><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head>
+<body>
+<div class="workspace"><header><a class="brand" href="/" aria-label="Allo Split Bill">allo<span>bank</span></a><span class="header-label">Split Bill</span></header>
+<main><section class="intro"><div><h1>Patungan</h1><p>Catat pengeluaran bersama dan bagi dengan mudah.</p></div><button class="primary" id="new-group">＋ Buat grup</button></section>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+<section class="section-heading"><div><h2>Grup patungan</h2><p>Pilih grup untuk melihat pengeluaran.</p></div><span id="group-count" class="count">0 grup</span></section>
+<div class="dashboard"><section><div id="groups" class="group-list"></div><div id="empty" class="empty"><h3>Belum ada grup</h3><p>Buat grup untuk mulai mencatat pengeluaran bersama.</p><button class="secondary" id="empty-create">＋ Buat grup pertama</button></div>
+<section id="group-detail" hidden><div class="detail-heading"><div><span class="eyebrow">GRUP AKTIF</span><h2 id="group-title"></h2><p id="members"></p></div><button id="add-expense" class="primary">＋ Pengeluaran</button></div><div class="tabs"><button class="tab active" id="expenses-tab">Pengeluaran</button><button class="tab" id="settlement-tab">Settlement</button></div><div id="expenses-panel"></div><div id="settlement-panel" hidden></div></section></section>
+</div>
+<footer class="page-footer"><span>allo bank <b>·</b> Split Bill</span><span>Catat. Bagi. Beres.</span></footer></main></div>
+<dialog id="group-dialog"><form id="group-form"><div class="modal-heading"><div><h2>Buat grup baru</h2></div><button type="button" class="close" data-close aria-label="Tutup">×</button></div><p class="muted">Masukkan nama grup dan anggota yang ikut.</p><label>Nama grup<input name="name" placeholder="Contoh: Weekend di Bandung" maxlength="100" required></label><label>Anggota grup <span class="muted">(satu nama per baris)</span><textarea name="participants" rows="4" placeholder="Ilham&#10;Budi&#10;Andi" required></textarea></label><p class="form-error" role="alert"></p><button class="primary full" type="submit">Buat grup →</button></form></dialog>
+<dialog id="expense-dialog"><form id="expense-form"><div class="modal-heading"><div><h2>Tambah pengeluaran</h2></div><button type="button" class="close" data-close aria-label="Tutup">×</button></div><label>Untuk apa?<input name="description" maxlength="255" placeholder="Contoh: Makan malam" required></label><label>Nominal (Rp)<input name="amount" type="number" min="0.01" max="90071992547409" step="0.01" inputmode="decimal" placeholder="150000" required></label><label>Dibayar oleh<select name="paidBy" required></select></label><fieldset><legend>Dibagi rata untuk</legend><div id="beneficiaries"></div></fieldset><p class="form-error" role="alert"></p><button class="primary full" type="submit">Simpan pengeluaran →</button></form></dialog>
+</body></html>

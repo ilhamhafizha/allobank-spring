@@ -31,7 +31,7 @@ The context test requires the configured PostgreSQL database. Calculator and req
 ./mvnw -Dtest=SettlementCalculatorTest,RequestValidationTest,SettlementResponseTest,SettlementServiceTest test
 ```
 
-Copy `.env.example` to `.env` once, then edit its values. Spring Boot reads `.env` from the working directory; shell environment variables override the file. Docker Compose also reads `.env` and supplies the container's internal database URL. Database credentials and the GitHub username are required. Compose exposes PostgreSQL on host port **5433** by default; its internal app connection uses port **5432**. If you change `DB_PORT` or `DB_NAME`, update the local `DB_URL` to match. Never commit `.env`.
+Copy `.env.example` to `.env` once, then edit its values. Spring Boot reads `.env` from the working directory; shell environment variables override the file. Docker Compose also reads `.env` and supplies the container's internal database URL. Database credentials and the GitHub username are required. Compose exposes PostgreSQL on host port **5433** by default; its internal app connection uses port **5432**. If you change `DB_PORT` or `DB_NAME`, update the local `DB_URL` to match. This private repository includes `.env` at the owner’s request so it is available after cloning. Review its settings for the destination PC.
 
 ## API examples
 
@@ -125,4 +125,4 @@ src/main/resources/
 src/test/java/   Unit, controller, and application context tests
 ```
 
-`.env.example` documents local configuration without real credentials. Build output (`target/`), IDE settings, `.env`, and local IDE files (`.local/idea/`) are excluded from Git. Supporting documentation is versioned in `.local/docs/`; this README contains the project explanation and setup instructions.
+`.env.example` documents the configuration fields. At the owner’s request, this private repository also versions `.env`, build output (`target/`), IDE settings, and local supporting files so they are available after cloning. Existing ignore rules still apply to new, untracked files. Supporting documentation is versioned in `.local/docs/`; this README contains the project explanation and setup instructions.
